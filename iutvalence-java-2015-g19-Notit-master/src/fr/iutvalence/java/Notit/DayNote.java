@@ -19,14 +19,14 @@ public class DayNote extends Note
 	/**
 	 * DayNote's constructor.
 	 * 
-	 * @param number
+	 * @param id
 	 * @param title
 	 * @param content
 	 * @param date
 	 */
-	public DayNote(int number, String title, String content, Date date)
+	public DayNote(int id, String title, String content, Date date)
 	{
-		super(number, title, content);
+		super(id, title, content);
 		this.date = date;
 	}
 	
@@ -43,10 +43,10 @@ public class DayNote extends Note
 		String path = "Notes/"+this.date.get(Date.YEAR) + "-" + this.date.get(Date.MONTH) + "-" + this.date.get(Date.DAY_OF_MONTH);
 		if (!Path.checkPath(path))
 			Path.createPath(path);
-		file = new File(path+"/"+this.number);
+		file = new File(path+"/"+this.id);
 		file.createNewFile();
 	 	write = new FileWriter(file);
-		write.write(this.number+"\r"+this.title+"\r"+this.content+"\r");
+		write.write(this.id+"\r"+this.title+"\r"+this.content+"\r");
 		write.close();
 	 }
 	
@@ -54,7 +54,7 @@ public class DayNote extends Note
 	 * To delete a day note.
 	 */
 	public void deleteNote(){
-		String path = "Notes/"+this.date.getDate()+"/"+this.number;
+		String path = "Notes/"+this.date.getDate()+"/"+this.id;
 		if(Path.checkPath(path)){
 			File file = new File(path);
 			file.delete();

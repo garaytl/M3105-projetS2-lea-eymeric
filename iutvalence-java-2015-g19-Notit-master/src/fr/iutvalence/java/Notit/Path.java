@@ -36,7 +36,7 @@ public class Path {
 	 * @param path
 	 * @return (max+1) the id for a new note
 	 */
-	public static int maxFileInPath(String path) {
+	public static int getIdNewNote(String path) {
 		int max = 0;
 		if(checkPath(path)){
 			File repository = new File(path);

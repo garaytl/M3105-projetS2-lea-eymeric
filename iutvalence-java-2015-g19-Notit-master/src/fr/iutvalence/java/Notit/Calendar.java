@@ -14,14 +14,7 @@ import java.util.TreeSet;
 
 public class Calendar
 {
-	/**
-	 * The list of date for a month.
-	 */
 	private Set<Date> listOfDateForAMonth;
-	
-	/**
-	 * the month number.
-	 */
 	private int monthNumber;
 
 	/**

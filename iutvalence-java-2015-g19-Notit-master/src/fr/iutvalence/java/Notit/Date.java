@@ -15,19 +15,8 @@ import java.util.Set;
 public class Date extends GregorianCalendar
 {
 
-	/**
-	 * A list of note.
-	 */
 	private Set<DayNote> listOfNote;
-	
-	/**
-	 * The name of the day.
-	 */
 	private String dayName;
-	
-	/**
-	 * The name of the month.
-	 */
 	private String monthName;
 
 	/**

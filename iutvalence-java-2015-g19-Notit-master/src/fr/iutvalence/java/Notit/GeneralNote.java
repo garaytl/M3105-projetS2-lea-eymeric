@@ -33,10 +33,10 @@ public class GeneralNote extends Note
 		String path = "GeneralNotes";
 		if (!Path.checkPath(path))
 			Path.createPath(path);
-		file = new File(path+"/"+this.number);
+		file = new File(path+"/"+this.id);
 		file.createNewFile();
  		write = new FileWriter(file);
-		write.write(this.number+"\r"+this.title+"\r"+this.content);
+		write.write(this.id+"\r"+this.title+"\r"+this.content);
 		write.close();
 	}
 	
@@ -45,7 +45,7 @@ public class GeneralNote extends Note
 	 * To delete a general note.
 	 */
 	public void deleteNote(){
-		String path = "GeneralNotes"+"/"+this.number;
+		String path = "GeneralNotes"+"/"+this.id;
 		if(Path.checkPath(path)){
 			File file = new File(path);
 			file.delete();

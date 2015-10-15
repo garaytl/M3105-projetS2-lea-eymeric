@@ -7,28 +7,19 @@ package fr.iutvalence.java.Notit;
  */
 public abstract class Note {
 
-	/**
-	 * Id of note.
-	 */
-	protected final int number;
-	/**
-	 * Title of note.
-	 */
+	protected final int id;
 	protected String title;
-	/**
-	 * The content of a note.
-	 */
 	protected String content;
 
 	/**
 	 * Note's constructor.
 	 * 
-	 * @param number
+	 * @param id
 	 * @param title
 	 * @param content
 	 */
-	protected Note(int number, String title, String content) {
-		this.number = number;
+	protected Note(int id, String title, String content) {
+		this.id = id;
 		this.title = title;
 		this.content = content;
 
@@ -76,14 +67,14 @@ public abstract class Note {
 	 * @return the number of the note
 	 */
 	public int getNumber() {
-		return number;
+		return id;
 	}
 
 	/**
 	 * displays the id, the title and the content of a note.
 	 */
 	public String toString() {
-		return this.number + this.title + this.content;
+		return this.id + this.title + this.content;
 	}
 
 }

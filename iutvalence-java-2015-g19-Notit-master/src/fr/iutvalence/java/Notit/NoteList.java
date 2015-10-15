@@ -14,14 +14,7 @@ import java.util.Set;
  */
 public class NoteList
 {
-	/**
-	 * The list of note of the day.
-	 */
 	private Set<DayNote> listOfDayNote;
-
-	/**
-	 * The list of general note.
-	 */
 	private Set<GeneralNote> listOfGeneralNote;
 
 	/**
@@ -31,40 +24,44 @@ public class NoteList
 	 */
 	public NoteList() throws IOException
 	{
-		String numTemp = "";
-		int numero = 0;
+		String temporaryIdOfTheNote = "";
+		int id = 0;
 		String title = "";
-		String contenu = "";
+		String content = "";
 		this.listOfDayNote = new HashSet<DayNote>();
 		this.listOfGeneralNote = new HashSet<GeneralNote>();
 		File[] files = arrayOfGeneralNote();
 		if (files != null){
 			for (int index = 0; index < files.length; index++)
 			{
-				numTemp = "";
-				numero = 0;
+				temporaryIdOfTheNote = "";
+				id = 0;
 				title = "";
-				contenu = "";
+				content = "";
 				FileReader flux = new FileReader(files[index]);
-				int lettre;
-				while ((lettre = flux.read()) != 13)
+				int letter;
+				temporaryIdOfTheNote = reader(temporaryIdOfTheNote, flux);
+				id = Integer.parseInt(temporaryIdOfTheNote);
+				title = reader(title, flux);
+				while ((letter = flux.read()) != -1)
 				{
-					numTemp += (char) lettre;
-				}
-				numero = Integer.parseInt(numTemp);
-				while ((lettre = flux.read()) != 13)
-				{
-					title += (char) lettre;
-				}
-				while ((lettre = flux.read()) != -1)
-				{
-					contenu += (char) lettre;
+					content += (char) letter;
 				}
 	
-				this.listOfGeneralNote.add(new GeneralNote(numero, title, contenu));
+				this.listOfGeneralNote.add(new GeneralNote(id, title, content));
 				flux.close();
-			}
+			       }
 		}
+	}
+
+	private String reader(String character, FileReader flux) throws IOException 
+	{
+		int letter;
+		while ((letter = flux.read()) != 13)
+		{
+			character += (char) letter;
+		}
+		return character;
 	}
 
 	/**
@@ -75,10 +72,10 @@ public class NoteList
 	 */
 	public NoteList(Date date) throws IOException
 	{
-		String numTemp = "";
-		int numero = 0;
+		String temporaryIdOfTheNote = "";
+		int id = 0;
 		String title = "";
-		String contenu = "";
+		String content = "";
 		this.listOfDayNote = new HashSet<DayNote>();
 		this.listOfGeneralNote = new HashSet<GeneralNote>();
 		File[] files = arrayOfDayNote(date);
@@ -86,25 +83,22 @@ public class NoteList
 		{
 			for (int index = 0; index < files.length; index++)
 			{
-				numTemp = "";
-				numero = 0;
+				temporaryIdOfTheNote = "";
+				id = 0;
 				title = "";
-				contenu = "";
+				content = "";
 				FileReader flux = new FileReader(files[index]);
 				int lettre;
 				while ((lettre = flux.read()) != 13){
-					numTemp += (char) (lettre);
+					temporaryIdOfTheNote += (char) (lettre);
 				}
-				numero = Integer.parseInt(numTemp);
-				while ((lettre = flux.read()) != 13)
-				{
-					title += (char) lettre;
-				}
+				id = Integer.parseInt(temporaryIdOfTheNote);
+				title = reader(title, flux);
 				while ((lettre = flux.read()) != -1)
 				{
-					contenu += (char) lettre;
+					content += (char) lettre;
 				}
-				listOfDayNote.add(new DayNote(numero, title, contenu, date));
+				listOfDayNote.add(new DayNote(id, title, content, date));
 				flux.close();
 			}
 		}
